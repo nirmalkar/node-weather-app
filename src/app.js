@@ -12,13 +12,19 @@ request({ url: url, json: true, }, (err, res) => {
     console.log("unable to find location");
   } else {
     const data = res.body
-    console.log(data.current)
-    console.log(`It's currently ${data.current.temperature} degree celsius in Bilaspur. It feels like ${data.current.feelslike} degree celsius.It's ${data.current.weather_descriptions[0]}.`);
+    // console.log(data.current)
+    // console.log(`It's currently ${data.current.temperature} degree celsius in Bilaspur. It feels like ${data.current.feelslike} degree celsius.It's ${data.current.weather_descriptions[0]}.`);
   }
 })
 
-// request({ url: geoUrl, json: true }, async (err, res) => {
-//   const data = await res.body.features[0]
-//   const lat = data.center[0]
-//   const lon = data.center[1]
-// })
+request({ url: geoUrl, json: true }, async (err, res) => {
+  if (err) {
+    console.log("Can not reach to mapbox!");
+  } else if (res.message) {
+    console.log("something went wrong")
+  } else {
+    const data = await res.body.features[0]
+    const lat = data.center[0]
+    const lon = data.center[1]
+  }
+})
