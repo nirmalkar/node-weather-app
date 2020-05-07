@@ -12,8 +12,8 @@ const geocode = (address, callback) => {
       const data = res.body.features[0]
       // callback(undefined, data)
       callback(undefined, {
-        latitude: data.center[0],
-        longitude: data.center[1],
+        longitude: data.center[0],
+        latitude: data.center[1],
         location: data.place_name
       })
     }
