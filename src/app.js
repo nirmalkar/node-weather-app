@@ -32,13 +32,18 @@ const forecast = require("./utils/forecast")
 //   }
 // })
 
+const address = process.argv[2]
 
-
-// geocode("raipur", (err, data) => {
-//   console.log(data.latitude)
-//   console.log(data.longitude)
-// })
-forecast(22.0797, 82.1409, (err, data) => {
+geocode(address, (err, data) => {
+  if (err) {
+    return console.log(err)
+  }
   console.log(data)
-  console.log(err)
+  forecast(data.latitude, data.longitude, (err, forecastData) => {
+    if (err) {
+      return err
+    }
+    console.log(data.location)
+    console.log(forecastData)
+  })
 })
